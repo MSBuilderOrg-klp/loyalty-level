@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: loyalty-level
-        image: cfc:8500/default/loyalty-level:latest
+        image: master.cfc:8500/default/loyalty-level:latest
         env:
           - name: MQ_ID
             valueFrom:
