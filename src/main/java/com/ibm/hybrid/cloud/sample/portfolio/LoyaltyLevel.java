@@ -73,13 +73,18 @@ public class LoyaltyLevel extends Application {
 		} else if (total > 10000.00) {
 			loyalty = "Bronze";
 		}
-
+/*
 		if (!loyalty.equals(oldLoyalty)) try {
 			JsonObjectBuilder builder = Json.createObjectBuilder();
 			builder.add("owner", owner);
 			builder.add("old", oldLoyalty);
 			builder.add("new", loyalty);
-
+*/			
+		if (!loyalty.equals(oldLoyalty)) try {
+			JsonObjectBuilder builder = Json.createObjectBuilder();
+			builder.add("customer", owner);
+			builder.add("status", loyalty);
+			
 			JsonObject message = builder.build();
 
 			invokeJMS(message);
@@ -108,7 +113,7 @@ public class LoyaltyLevel extends Application {
 		queue = (Queue) context.lookup(NOTIFICATION_Q);
 
 		initialized = true;
-		System.out.println("Initialization completed successfully!");
+		System.out.println("LoyaltyLevel: Initialization completed successfully!");
 	}
 
 	/** Send a JSON message to our notification queue.
@@ -128,6 +133,6 @@ public class LoyaltyLevel extends Application {
 		session.close();
 		connection.close();
 
-		System.out.println("Message sent successfully!");
+		System.out.println("LoyaltyLevel: Message sent successfully to NotificationQ!");
 	}
 }
